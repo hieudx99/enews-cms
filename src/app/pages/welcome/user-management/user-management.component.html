@@ -1,0 +1,63 @@
+<!-- <button (click)="btnAddOnclick()" style="margin-bottom: 10px;" type="button" class="btn btn-secondary btn-sm">Thêm
+    mới</button> -->
+
+<div class="list row">
+    <div class="col-md-8">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Tìm kiếm user..." [(ngModel)]="username" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="searchUser()">
+                    Tìm
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6" *ngIf="listUser">
+        <h4>Danh sách tài khoản</h4>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let user of listUser; let i = index" [class.active]="i == currentIndex"
+                (click)="setActiveUser(user, i)">
+                {{ user.username }}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <div *ngIf="currentUser.id">
+            <h4>Tài khoản</h4>
+            <div>
+                <label><strong>Tên tài khoản: {{ currentUser.username }}</strong></label>
+            </div>
+            <div>
+                <label><strong>Họ tên: </strong></label>
+                {{ currentUser.fullName }}
+            </div>
+            <div>
+                <label><strong>email: </strong></label>
+                {{ currentUser.email }}
+            </div>
+            <div>
+                <label><strong>Số điện thoại: </strong></label>
+                {{ currentUser.msisdn }}
+            </div>
+
+            <!-- <div>
+                    <label><strong>Status:</strong></label>
+                    {{ currentArticle. ? "Published" : "Pending" }}
+                </div> -->
+
+            <!-- <a style="padding: 10px 25px; min-width: 100px; margin-right: 10px;" class="badge badge-warning"
+                routerLink="/welcome/article-management-detail/{{ currentArticle.id }}">
+                Sửa
+            </a> -->
+            <a *ngIf="currentUser.status == 1" class="badge badge-secondary" (click)="blockUser(currentUser.id)"
+                style="padding: 10px 25px; color: #fff!important;">Khoá tài khoản</a>
+            <a *ngIf="currentUser.status == 0" class="badge badge-primary" (click)="unblockUser(currentUser.id)"
+                style="padding: 10px 25px; color: #fff!important;">Mở khoá tài khoản</a>
+        </div>
+
+        <div *ngIf="!currentUser">
+            <br />
+            <p>Please click on a Article...</p>
+        </div>
+    </div>
+</div>

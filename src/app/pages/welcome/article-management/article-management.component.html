@@ -1,0 +1,64 @@
+<!-- <button (click)="btnAddOnclick()" style="margin-bottom: 10px;" type="button" class="btn btn-secondary btn-sm">Thêm
+    mới</button> -->
+
+<div class="list row">
+    <div class="col-md-8">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Tìm kiếm bài viết..." [(ngModel)]="title" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="searchTitle()">
+                    Tìm
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6" *ngIf="listArticle">
+        <h4>Danh sách bài viết</h4>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let article of listArticle; let i = index"
+                [class.active]="i == currentIndex" (click)="setActiveArticle(article, i)">
+                {{ article.title }}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <div *ngIf="currentArticle.id">
+            <h4>Bài viết</h4>
+            <div>
+                <label><strong>Tiêu đề: {{ currentArticle.title }}</strong></label>
+            </div>
+            <div>
+                <label><strong>Tác giả: </strong></label>
+                {{ currentArticle.author }}
+            </div>
+            <div>
+                <label><strong>Lượt xem: </strong></label>
+                {{ currentArticle.views }}
+            </div>
+            <div>
+                <label><strong>Danh mục: </strong></label>
+                {{ currentArticle.category.name }}
+            </div>
+            <!-- <div>
+                <label><strong>Status:</strong></label>
+                {{ currentArticle. ? "Published" : "Pending" }}
+            </div> -->
+
+            <a style="padding: 10px 25px; min-width: 100px; margin-right: 10px;" class="badge badge-warning"
+                routerLink="/welcome/article-management-detail/{{ currentArticle.id }}">
+                Sửa
+            </a>
+            <a *ngIf="currentArticle.isVisible == 1" class="badge badge-secondary"
+                (click)="hideArticle(currentArticle.id)" style="padding: 10px 25px; color: #fff!important;">Ẩn bài
+                viết</a>
+            <a *ngIf="currentArticle.isVisible == 0" class="badge badge-primary"
+                (click)="displayArticle(currentArticle.id)" style="padding: 10px 25px; color: #fff!important;">Hiện bài
+                viết</a>
+        </div>
+
+        <div *ngIf="!currentArticle">
+            <br />
+            <p>Please click on a Article...</p>
+        </div>
+    </div>
+</div>

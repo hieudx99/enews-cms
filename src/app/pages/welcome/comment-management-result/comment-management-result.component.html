@@ -1,0 +1,51 @@
+<table class="table" style="width: 100%;">
+
+    <colgroup>
+        <col span="1" style="width: 5%;"> //id
+        <col span="1" style="width: 25%;"> //content
+        <col span="1" style="width: 15%;"> //requestDate
+        <col span="1" style="width: 8%;"> //user
+        <col span="1" style="width: 25%;"> //article
+        <col span="1" style="width: 6%;"> //isVisible
+        <col span="1" style="width: 10%;"> //button
+    </colgroup>
+
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nội dung</th>
+            <th scope="col">Ngày đăng</th>
+            <th scope="col">Người đăng</th>
+            <th scope="col">Bài viết</th>
+            <th scope="col">Hiển thị</th>
+            <th scope="col">Hành động</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let comment of listComment">
+            <td>{{comment.id}}</td>
+            <td>{{comment.content}}</td>
+            <td>{{comment.requestDate}}</td>
+            <td>{{comment.user.fullName}}</td>
+            <td>{{comment.article.title}}</td>
+            <td>{{comment.isVisible}}</td>
+            <td *ngIf="comment.isVisible == 1">
+                <button (click)="hideComment(comment.id)" type="button" class="btn btn-dark">Ẩn bình luận</button>
+            </td>
+            <td *ngIf="comment.isVisible == 0">
+                <button (click)="displayComment(comment.id)" type="button" class="btn btn-light">Hiện bình luận</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="container">
+    <!-- <div class="row">
+        <div class="col-md-7">
+            <strong>Total:</strong>
+        </div>
+        <div class="col-md-5">
+            <strong style="color: #d0011b; margin-left: -20px;">{{total | currency: "VND"}}</strong>
+        </div>
+    </div> -->
+</div>

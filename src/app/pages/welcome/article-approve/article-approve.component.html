@@ -1,0 +1,46 @@
+<!-- <div class="col-md-8">
+    <div class="input-group mb-3">
+        <input id="txtKeyword" type="text" class="form-control" placeholder="Tiêu đề bài viết..."
+            aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button (click)="searchArticle()" class="btn btn-outline-secondary" type="button">Tìm</button>
+        </div>
+    </div>
+</div> -->
+
+<p *ngIf="!listArticle">Không có bài viết chờ duyệt!</p>
+
+<table *ngIf="listArticle" class="table" style="width: 100%;">
+
+    <colgroup>
+        <col span="1" style="width: 5%;"> //id
+        <col span="1" style="width: 25%;"> //tiêu đề
+        <col span="1" style="width: 10%;"> //ngày đăng
+        <col span="1" style="width: 10%;"> //tác giả
+        <col span="1" style="width: 10%;"> //danh mục
+        <col span="1" style="width: 10%;"> //button
+    </colgroup>
+
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Tiêu đề</th>
+            <th scope="col">Ngày đăng</th>
+            <th scope="col">Tác giả</th>
+            <th scope="col">Danh mục</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let article of listArticle">
+            <td>{{article.id}}</td>
+            <td>{{article.title}}</td>
+            <td>{{article.createdDate}}</td>
+            <td>{{article.author}}</td>
+            <td>{{article.category.name}}</td>
+            <td>
+                <button (click)="viewComment(article.id)" type="button" class="btn btn-warning">Duyệt</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
